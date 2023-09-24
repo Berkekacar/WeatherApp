@@ -93,7 +93,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                             // Diğer location altındaki verilere de benzer şekilde erişebilirsiniz.
                             
                         }}} catch {
-                    print("hata 38")
+                    
                 }
             }
         }
