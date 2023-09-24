@@ -12,6 +12,7 @@ import Foundation
 class ViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var dereceLabel :UILabel!
     var currentLocation = ""
     var locationManager = CLLocationManager()
     
@@ -79,18 +80,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             if let data = data {
                 do {
                     if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]{
-                        if let location = json["location"] as? [String: Any] {
-                            // "location" altındaki verilere erişebilirsiniz.
-                            if let country = location["country"] as? String {
-                                print("Ülke: \(country)")
+                        if let location = json["current"] as? [String: Any] {
+                            // "location" altındaki verilere erişebilirsiniz.,
+                            DispatchQueue.main.async {
+                                if let feelslike = location["feelslike"] as? Int {
+                                    self.dereceLabel.text = String(feelslike)
+                                }
                             }
-                            if let lat = location["lat"] as? String {
-                                print("Enlem: \(lat)")
+                            
+                            if let weather_descripton = location["weather_descriptions"]  as? [String]{
+                                if let firstDescription = weather_descripton.first{
+                                    print("Weather Description : \(firstDescription)")
+                                    self.background(weather: firstDescription)
+                                }
                             }
-                            if let lon = location["lon"] as? String {
-                                print("Boylam: \(lon)")
-                            }
+//                            if let lat = location["lat"] as? String {
+//                                print("Enlem: \(lat)")
+//                            }
                             // Diğer location altındaki verilere de benzer şekilde erişebilirsiniz.
+                            
                             
                         }}} catch {
                     
@@ -99,8 +107,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
         task.resume()
     }
-    
-    
+    func background(weather: String) {
+        DispatchQueue.main.async {
+            let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+            switch weather {
+            case "Overcast":
+                backgroundImage.image = UIImage(named: "Overcast")
+                print("overcasr")
+            default:
+                print("This is the default case.")
+            }
+            backgroundImage.contentMode = .scaleAspectFill
+            self.view.insertSubview(backgroundImage, at: 0)
+        }
+        
+    }
+
 
 }
 
