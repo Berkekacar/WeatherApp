@@ -13,6 +13,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var dereceLabel :UILabel!
+    @IBOutlet weak var descriptionLabel : UILabel!
     var currentLocation = ""
     var locationManager = CLLocationManager()
     
@@ -75,7 +76,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         var request = URLRequest(url: apiUrl)
         request.httpMethod = "GET"
         
-        let task = session.dataTask(with: request){
+        let task = session.dataTask(with: request){ [self]
             (data,res,err) in
             if let data = data {
                 do {
@@ -92,6 +93,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                                 if let firstDescription = weather_descripton.first{
                                     print("Weather Description : \(firstDescription)")
                                     self.background(weather: firstDescription)
+                                    DispatchQueue.main.async {
+                                        self.descriptionLabel.text = String(firstDescription)
+                                    }
+                                    
                                 }
                             }
 //                            if let lat = location["lat"] as? String {
@@ -113,7 +118,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             switch weather {
             case "Overcast":
                 backgroundImage.image = UIImage(named: "Overcast")
-                print("overcasr")
+            case "Clear":
+                backgroundImage.image = UIImage(named: "Clear")
             default:
                 print("This is the default case.")
             }

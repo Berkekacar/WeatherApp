@@ -38,12 +38,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6g-Vb-e3e">
+                                <rect key="frame" x="171" y="505" width="87" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                     </view>
                     <connections>
                         <outlet property="dereceLabel" destination="AGR-lv-huW" id="ORv-IS-s99"/>
+                        <outlet property="descriptionLabel" destination="m6g-Vb-e3e" id="rua-ch-XiX"/>
                         <outlet property="locationLabel" destination="Dzk-Kp-QYJ" id="V34-dc-YX5"/>
                     </connections>
                 </viewController>
